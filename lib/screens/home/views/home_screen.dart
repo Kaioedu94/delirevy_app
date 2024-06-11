@@ -25,7 +25,10 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.cart)),
+          IconButton(onPressed: () {
+
+            
+          }, icon: const Icon(CupertinoIcons.cart)),
           IconButton(
               onPressed: () {
                 context.read<SignInBloc>().add(SignOutRequired());
@@ -68,23 +71,21 @@ class HomeScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 12.0),
                             child: Row(
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: state.pizzas[i].isVeg
-                                      ? Colors.green
-                                      : Colors.red,
-                                    borderRadius: BorderRadius.circular(30)
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                                    child: Text(
-                                      state.pizzas[i].isVeg
-                                        ? "VEG"
-                                        : "NON-VEG",
-                                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
-                                    ),
-                                  ),
-                                ),
+                                state.pizzas[i].isVeg
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                                        child: Text(
+                                          "VEGANO",
+                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox.shrink(),
                                 const SizedBox(width: 8),
                                 Container(
                                   decoration: BoxDecoration(color: Colors.green.withOpacity(0.2), borderRadius: BorderRadius.circular(30)),
@@ -92,16 +93,12 @@ class HomeScreen extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                                     child: Text(
                                       state.pizzas[i].spicy == 1
-                                        ? "🌶️ BLAND"
-                                        : state.pizzas[i].spicy == 2
-                                          ? "🌶️ BALANCE"
-                                          : "🌶️ SPICY",
+                                        ? "🍕 Não apimentada"
+                                        :"🌶️ APIMENTADA",                                          
                                       style: TextStyle(
                                         color: state.pizzas[i].spicy == 1
                                         ? Colors.green
-                                        : state.pizzas[i].spicy == 2
-                                          ? Colors.orange
-                                          : Colors.redAccent, 
+                                        : Colors.redAccent,
                                         fontWeight: FontWeight.w800, 
                                         fontSize: 10
                                       ),
