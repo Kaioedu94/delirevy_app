@@ -121,7 +121,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                         child: Text(
-                          'Sign In',
+                          'Entrar',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,

@@ -70,7 +70,7 @@ Widget build(BuildContext context) {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 150), // Ajustar o valor conforme necessário
+                  const SizedBox(height: 150), 
                   TabBar(
                     controller: tabController,
                     unselectedLabelColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
@@ -88,7 +88,7 @@ Widget build(BuildContext context) {
                       Padding(
                         padding: EdgeInsets.all(12.0),
                         child: Text(
-                          'Registrar-se',
+                          'Cadastre-se',
                           style: TextStyle(
                             fontSize: 18,
                           ),
