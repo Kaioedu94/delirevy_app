@@ -1,11 +1,13 @@
-import 'package:delivery_app/screens/home/views/cart_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:delivery_app/screens/auth/blocs/sing_in_bloc/sign_in_bloc.dart';
 import 'package:delivery_app/screens/home/blocs/get_pizza_bloc/get_pizza_bloc.dart';
+import 'package:delivery_app/screens/home/views/cart_screen.dart';
 import 'package:delivery_app/screens/home/views/details_screen.dart';
 
+
+import '../../../sobre.dart'; // Importe SobreView
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -35,6 +37,15 @@ class HomeScreen extends StatelessWidget {
               );
             },
             icon: const Icon(CupertinoIcons.cart),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SobreView()), // Navega para SobreView
+              );
+            },
+            icon: const Icon(CupertinoIcons.info_circle),
           ),
           IconButton(
             onPressed: () {

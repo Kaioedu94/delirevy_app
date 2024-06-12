@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../components/my_text_field.dart';
 import '../blocs/sing_in_bloc/sign_in_bloc.dart';
@@ -20,6 +21,7 @@ class _SignInScreenState extends State<SignInScreen> {
   IconData iconPassword = CupertinoIcons.eye_fill;
   bool obscurePassword = true;
   String? _errorMsg;
+  final TextEditingController _recoveryEmailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -148,12 +150,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: const Text('Recuperação de Senha'),
-                      content: const SingleChildScrollView(
+                      content: SingleChildScrollView(
                         child: ListBody(
                           children: <Widget>[
-                            Text('Digite o e-mail para recuperar a senha.'),
+                            const Text('Digite o e-mail para recuperar a senha.'),
                             TextField(
-                              decoration: InputDecoration(
+                              controller: _recoveryEmailController,
+                              decoration: const InputDecoration(
                                 labelText: 'E-mail',
                               ),
                             ),
@@ -168,16 +171,24 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: const Text('Cancelar'),
                         ),
                         TextButton(
-                          onPressed: () {
-                            // Adicione aqui a lógica para enviar o e-mail de recuperação
-                            Navigator.of(context).pop();
-                            //Menssagem de confirmação de senha
-                            ScaffoldMessenger.of(context).showSnackBar(
-                               const 
-                               SnackBar(
-                               content: Text('E-mail de recuperação enviado'),
-                               ),
-                            );
+                          onPressed: () async {
+                            try {
+                              await FirebaseAuth.instance.sendPasswordResetEmail(
+                                email: _recoveryEmailController.text,
+                              );
+                              Navigator.of(context).pop();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('E-mail de recuperação enviado'),
+                                ),
+                              );
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Erro ao enviar e-mail de recuperação'),
+                                ),
+                              );
+                            }
                           },
                           child: const Text('Enviar'),
                         ),
@@ -186,7 +197,6 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                 );
               },
-
             ),
           ],
         ),
