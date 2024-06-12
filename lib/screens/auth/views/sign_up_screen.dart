@@ -271,23 +271,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                 ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: MyTextField(
-                    controller: addressController,
-                    hintText: 'Endereço',
-                    obscureText: false,
-                    keyboardType: TextInputType.streetAddress,
-                    prefixIcon: const Icon(CupertinoIcons.location_solid),
-                    validator: (val) {
-                      if (val!.isEmpty) {
-                        return '*Preenchimento obrigatório';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
+
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 !signUpRequired
                     ? SizedBox(
