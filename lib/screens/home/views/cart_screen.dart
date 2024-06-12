@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../blocs/cart_bloc/cart_bloc.dart';
-
 
 class CartScreen extends StatelessWidget {
   @override
@@ -21,11 +19,10 @@ class CartScreen extends StatelessWidget {
                   child: ListTile(
                     leading: Image.network(state.cart[index].image),
                     title: Text(state.cart[index].name),
-                    subtitle: Text('\$${state.cart[index].price.toStringAsFixed(2)}'),
+                    subtitle: Text('R\$${state.cart[index].price.toStringAsFixed(2)}'),
                     trailing: IconButton(
                       icon: Icon(Icons.remove_circle_outline),
                       onPressed: () {
-                        // Remover item do carrinho
                         BlocProvider.of<CartBloc>(context).add(RemoveFromCart(state.cart[index]));
 
                         ScaffoldMessenger.of(context).showSnackBar(
