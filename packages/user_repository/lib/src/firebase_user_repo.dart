@@ -68,9 +68,15 @@ class FirebaseUserRepo implements UserRepository {
       rethrow;
     }
   }
+  
+   Future<void> inserirDados(String collectionPath, Map<String, dynamic> data) async {
+    try {
+      await FirebaseFirestore.instance.collection(collectionPath).add(data);
+      log('Dados inseridos na coleção $collectionPath com sucesso');
+    } catch (e) {
+      log('Erro ao inserir dados na coleção $collectionPath: $e');
+      rethrow;
+    }
+  }
 
-  
-
-  
-  
 }

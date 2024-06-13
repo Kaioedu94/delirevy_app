@@ -5,7 +5,7 @@ import 'package:delivery_app/screens/auth/blocs/sing_in_bloc/sign_in_bloc.dart';
 import 'package:delivery_app/screens/home/blocs/get_pizza_bloc/get_pizza_bloc.dart';
 import 'package:delivery_app/screens/home/views/cart_screen.dart';
 import 'package:delivery_app/screens/home/views/details_screen.dart';
-
+import 'data_insertionpage.dart'; // Certifique-se de que o caminho esteja correto
 
 import '../../../sobre.dart'; // Importe SobreView
 
@@ -46,6 +46,15 @@ class HomeScreen extends StatelessWidget {
               );
             },
             icon: const Icon(CupertinoIcons.info_circle),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DataInsertionPage()), // Navega para DataInsertionPage
+              );
+            },
+            icon: const Icon(CupertinoIcons.add), // Ícone para inserir dados
           ),
           IconButton(
             onPressed: () {
