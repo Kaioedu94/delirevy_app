@@ -6,41 +6,35 @@ part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  CartBloc() : super(CartInitial());
-
-  Stream<CartState> mapEventToState(CartEvent event) async* {
-    if (event is AddToCart) {
-      yield* _mapAddToCartToState(event);
-    } else if (event is RemoveFromCart) {
-      yield* _mapRemoveFromCartToState(event);
-    } else if (event is GetCart) {
-      yield* _mapGetCartToState();
-    }
+  CartBloc() : super(CartInitial()) {
+    on<AddToCart>(_onAddToCart);
+    on<RemoveFromCart>(_onRemoveFromCart);
+    on<GetCart>(_onGetCart);
   }
 
-  Stream<CartState> _mapAddToCartToState(AddToCart event) async* {
+  void _onAddToCart(AddToCart event, Emitter<CartState> emit) {
     if (state is CartUpdated) {
       final List<Pizza> updatedCart = List.from((state as CartUpdated).cart)..add(event.pizza);
-      yield CartUpdated(updatedCart);
+      emit(CartUpdated(updatedCart));
     } else {
-      yield CartUpdated([event.pizza]);
+      emit(CartUpdated([event.pizza]));
     }
   }
 
-  Stream<CartState> _mapRemoveFromCartToState(RemoveFromCart event) async* {
+  void _onRemoveFromCart(RemoveFromCart event, Emitter<CartState> emit) {
     if (state is CartUpdated) {
       final List<Pizza> updatedCart = List.from((state as CartUpdated).cart)..remove(event.pizza);
-      yield CartUpdated(updatedCart);
+      emit(CartUpdated(updatedCart));
     } else {
-      yield const CartUpdated([]);
+      emit(const CartUpdated([]));
     }
   }
 
-  Stream<CartState> _mapGetCartToState() async* {
+  void _onGetCart(GetCart event, Emitter<CartState> emit) {
     if (state is CartUpdated) {
-      yield state;
+      emit(state);
     } else {
-      yield const CartUpdated([]); 
+      emit(const CartUpdated([])); 
     }
   }
 }

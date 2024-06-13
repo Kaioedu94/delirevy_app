@@ -25,14 +25,13 @@ class CartScreen extends StatelessWidget {
                 final cartItem = state.cart[index];
                 return Card(
                   child: ListTile(
-                    
-                    leading: Image.asset('assets/1.png'),
+                    leading: Image.asset('assets/1.png'), // Atualize o caminho da imagem conforme necessário
                     title: Text(cartItem.name),
                     subtitle: Text('R\$${cartItem.price.toStringAsFixed(2)}'),
                     trailing: IconButton(
                       icon: const Icon(Icons.remove_circle_outline),
                       onPressed: () {
-                        BlocProvider.of<CartBloc>(context).add(RemoveFromCart(cartItem));
+                        context.read<CartBloc>().add(RemoveFromCart(cartItem));
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Item removido do carrinho'),
